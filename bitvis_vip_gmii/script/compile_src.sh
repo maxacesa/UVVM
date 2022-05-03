@@ -1,0 +1,1 @@
+../../script/compile_src.sh
