@@ -19,9 +19,9 @@ while getopts ":w:" opt; do
 	esac
 done
 
-#SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-SCRIPT_DIR=$(dirname "$(realpath -s ${BASH_SOURCE[0]})")
-FILES=$(cat $SCRIPT_DIR/compile_order.txt | sed -r 's/#.*//g')
+SCRIPT_PATH=$(realpath -s "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+FILES=$(cat "$SCRIPT_DIR/compile_order.txt" | sed -r 's/#.*//g')
 COMPILE='ghdl -a --std=08 -frelaxed --work=$wrk'
 
 for f in $FILES; do
@@ -29,6 +29,6 @@ for f in $FILES; do
 
 	pth="$SCRIPT_DIR/$f"
 
-	echo "-- running '$COMPILE $pth'"
-	eval "$COMPILE $pth"
+	echo "-- running '$COMPILE $SCRIPT_DIR/$f'"
+	eval "$COMPILE \"$SCRIPT_DIR/$f\""
 done
