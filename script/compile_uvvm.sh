@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SCRIPT_DIR=$(dirname "$(realpath -s ${BASH_SOURCE[0]})")
+SCRIPT_DIR=$(dirname "$(realpath -s ${0})")
 MODULES=$(cat "$SCRIPT_DIR/component_list.txt" | sed -r 's/#.*//g')
 
 echo "dir: $SCRIPT_DIR"
